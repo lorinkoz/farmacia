@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Sistema_Gestion_Medicamentos', '0014_auto_20180123_0032'),
+        ('sistema', '0014_auto_20180123_0032'),
     ]
 
     operations = [
@@ -64,11 +64,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pedidofarmacia',
             name='tarjeta_estiba',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.TarjetaEstiba'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.TarjetaEstiba'),
         ),
         migrations.AddField(
             model_name='devueltofarmacia',
             name='tarjeta_estiba',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.TarjetaEstiba'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.TarjetaEstiba'),
         ),
     ]

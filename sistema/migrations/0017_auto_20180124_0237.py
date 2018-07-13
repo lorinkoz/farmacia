@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Sistema_Gestion_Medicamentos', '0016_auto_20180123_0655'),
+        ('sistema', '0016_auto_20180123_0655'),
     ]
 
     operations = [
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('cantidad_solicitada', models.IntegerField()),
                 ('cantidad_entregada', models.IntegerField()),
                 ('importe', models.FloatField(default=0)),
-                ('producto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Producto')),
+                ('producto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.Producto')),
             ],
         ),
         migrations.RemoveField(
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pedidocama',
             name='pedido_sala_detalle',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.PedidoSalaDetalle'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sistema.PedidoSalaDetalle'),
             preserve_default=False,
         ),
     ]

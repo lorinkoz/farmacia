@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Sistema_Gestion_Medicamentos', '0042_auto_20180127_1400'),
+        ('sistema', '0042_auto_20180127_1400'),
     ]
 
     operations = [
@@ -26,16 +26,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='devueltosaladetalle',
             name='producto',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Producto'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.Producto'),
         ),
         migrations.AlterField(
             model_name='pedidosaladetalle',
             name='pedido_sala',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='pedido_sala', to='Sistema_Gestion_Medicamentos.PedidoSala'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='pedido_sala', to='sistema.PedidoSala'),
         ),
         migrations.AlterField(
             model_name='pedidosaladetalle',
             name='producto',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Producto'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.Producto'),
         ),
     ]

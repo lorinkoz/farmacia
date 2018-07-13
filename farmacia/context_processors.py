@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from Sistema_Gestion_Medicamentos.models import PermisoGlobal
+from sistema.models import PermisoGlobal
 
 
 def security(request):

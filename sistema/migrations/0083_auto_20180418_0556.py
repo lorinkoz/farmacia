@@ -9,25 +9,25 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Sistema_Gestion_Medicamentos', '0082_entidad'),
+        ('sistema', '0082_entidad'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='devueltosala',
             name='entidad',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Entidad'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sistema.Entidad'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='pedidosala',
             name='entidad',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Entidad'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sistema.Entidad'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='pedidofarmacia',
             name='entidad',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Entidad'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.Entidad'),
         ),
     ]

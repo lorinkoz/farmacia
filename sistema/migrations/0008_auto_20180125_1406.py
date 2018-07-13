@@ -9,13 +9,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Sistema_Gestion_Medicamentos', '0007_auto_20180124_1410'),
+        ('sistema', '0007_auto_20180124_1410'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='pedidocama',
             name='producto',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Producto'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.Producto'),
         ),
     ]

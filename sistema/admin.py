@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Sistema_Gestion_Medicamentos.models import PedidoCama, Producto, DevueltoCama, Existencia, Sala, Cama, PedidoSala, \
+from sistema.models import PedidoCama, Producto, DevueltoCama, Existencia, Sala, Cama, PedidoSala, \
     DevueltoSala, PedidoSalaDetalle, DevueltoSalaDetalle, Presentacion, UnidadMedida, Justificacion, DevueltoFarmacia,\
     DevueltoAlmacen, DevueltoAlmacenDetalle, PedidoAlmacen, PedidoAlmacenDetalle, PermisoGlobal
 # Register your models here.

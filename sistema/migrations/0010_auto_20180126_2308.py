@@ -9,14 +9,14 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Sistema_Gestion_Medicamentos', '0009_auto_20180126_2238'),
+        ('sistema', '0009_auto_20180126_2238'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='devuelto',
             name='cama',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Cama'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sistema.Cama'),
             preserve_default=False,
         ),
         migrations.AddField(

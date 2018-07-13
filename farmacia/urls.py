@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from Sistema_Gestion_Medicamentos.views import inicio, logear, deslogear, agregar_cantidad_medicamentos, \
+from sistema.views import inicio, logear, deslogear, agregar_cantidad_medicamentos, \
     agregar_pedido_cama, editar_pedido_cama, pedidosCama, cama_unico, agregar_cama, editar_cama, cama, eliminar_cama, \
     existencia, sala, agregar_sala, eliminar_sala, eliminar_pedido_cama, agregar_devuelto_cama, editar_devuelto_cama, \
     eliminar_devuelto_cama, devueltosCama, devolucionesSala, agregar_producto, editar_producto, eliminar_producto, \

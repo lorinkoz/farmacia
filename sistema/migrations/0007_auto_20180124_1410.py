@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Sistema_Gestion_Medicamentos', '0006_auto_20180124_1324'),
+        ('sistema', '0006_auto_20180124_1324'),
     ]
 
     operations = [
@@ -67,12 +67,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='pedidocama',
             name='producto',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Producto'),
+            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='sistema.Producto'),
         ),
         migrations.AddField(
             model_name='existencia',
             name='producto',
-            field=models.OneToOneField(default=1, on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Producto'),
+            field=models.OneToOneField(default=1, on_delete=django.db.models.deletion.CASCADE, to='sistema.Producto'),
             preserve_default=False,
         ),
     ]

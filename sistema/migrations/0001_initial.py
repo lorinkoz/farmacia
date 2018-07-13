@@ -78,7 +78,7 @@ class Migration(migrations.Migration):
                 ('precio', models.FloatField(default=0)),
                 ('cantidad_solicitada', models.IntegerField()),
                 ('medico', models.CharField(max_length=40)),
-                ('cama', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Cama')),
+                ('cama', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.Cama')),
             ],
         ),
         migrations.CreateModel(
@@ -104,11 +104,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pedidosala',
             name='sala',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Sala'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.Sala'),
         ),
         migrations.AddField(
             model_name='cama',
             name='sala',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Sistema_Gestion_Medicamentos.Sala'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sistema.Sala'),
         ),
     ]
