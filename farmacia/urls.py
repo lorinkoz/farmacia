@@ -28,7 +28,7 @@ from sistema.views import inicio, logear, deslogear, agregar_cantidad_medicament
     despachar_pedido_farmacia, pedidosAlmacen, editar_cantidad_medicamentos, eliminar_pedido_farmacia, \
     ver_despacho_devuelto_farmacia, ver_despacho_pedido_farmacia, ReporteProductoPDF, ReporteSalaPDF, \
     ver_despacho_pedido_sala, ver_despacho_devuelto_sala, ReportePedidoCamaPDF, ReporteDevueltoCamaPDF, \
-    ReporteBajaCoberturaPDF, ReporteFiltroImportePDF, ReporteDevueltoSalaPDF, ReportePedidoSalaPDF, \
+    ReporteBajaCoberturaPDF, ReporteDevueltoSalaPDF, ReportePedidoSalaPDF, \
     ReporteDevueltoAlmacenPDF, ReportePedidoAlmacenPDF, eliminar_cantidad_medicamentos, permisoGlobal, ayuda
 
 urlpatterns = [
@@ -117,6 +117,5 @@ urlpatterns = [
     url(r'^ReportePedidoAlmacenPDF/(?P<id_pf>\w+)/$', ReportePedidoAlmacenPDF.as_view(), name='ReportePedidoAlmacenPDF'),
     url(r'^ReporteDevueltoAlmacenPDF/(?P<id_df>\w+)/$', ReporteDevueltoAlmacenPDF.as_view(), name='ReporteDevueltoAlmacenPDF'),
     url(r'^ReporteBajaCoberturaPDF/$', ReporteBajaCoberturaPDF.as_view(), name='ReporteBajaCoberturaPDF'),
-    url(r'^ReporteFiltroImportePDF/$', ReporteFiltroImportePDF.as_view(), name='ReporteFiltroImportePDF'),
     url(r'^admin/', admin.site.urls),
 ]

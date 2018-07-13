@@ -1174,17 +1174,18 @@ class ReportePedidoCamaPDF(View):
         return response
 
     def tabla(self, id_ps):
-        titulo = ['PEDIDO', '', '', '', '', '', '']
-        encabezados = ('CAMA No.', 'HISTORIA CLÍNICA', 'PRODUCTO', 'DOSIS', 'UNIDAD', 'CANTIDAD', 'MÉDICO')
+        titulo = ['PEDIDO', '', '', '', '', '', '', '']
+        encabezados = ('CAMA No.', 'HISTORIA CLÍNICA', 'PRODUCTO', 'DOSIS', '', 'UNIDAD', 'CANTIDAD', 'MÉDICO')
         psd = PedidoSalaDetalle.objects.select_related().filter(pedido_sala=id_ps)
         p = PedidoCama.objects.select_related().filter(pedido_sala_detalle__in=psd)
-        detalles = [(pc.cama.num_cama, pc.cama.historia_clinica, pc.producto, pc.producto.dosis, pc.producto.unidad, pc.cantidad_solicitada, pc.medico) for pc in p]
+        detalles = [(pc.cama.num_cama, pc.cama.historia_clinica, pc.producto, pc.producto.dosis, pc.producto.unidad_medida,  pc.producto.unidad, pc.cantidad_solicitada, pc.medico) for pc in p]
         detalle_orden = Table([titulo] + [encabezados] + detalles)
         detalle_orden.setStyle(TableStyle([
             ('ALIGN', (0, 0), (3, 0), 'CENTER'),
-            ('SPAN', (0, 0), (6, 0)),
+            ('SPAN', (0, 0), (7, 0)),
             ('GRID', (0, 0), (-1, -1), 1, colors.black),
             ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('SPAN', (3, 1), (4, 1)),
         ]))
         return detalle_orden
 
@@ -1202,17 +1203,18 @@ class ReporteDevueltoCamaPDF(View):
         return response
 
     def tabla(self, id_ds):
-        titulo = ['DEVOLUCIÓN', '', '', '', '', '', '', '']
-        encabezados = ('CAMA No.', 'HISTORIA CLÍNICA', 'PRODUCTO', 'DOSIS', 'UNIDAD', 'CANTIDAD', 'JUSTIFICACIÓN', 'MÉDICO')
+        titulo = ['DEVOLUCIÓN', '', '', '', '', '', '', '', '']
+        encabezados = ('CAMA No.', 'HISTORIA CLÍNICA', 'PRODUCTO', 'DOSIS', '', 'UNIDAD', 'CANTIDAD', 'JUSTIFICACIÓN', 'MÉDICO')
         dsd = DevueltoSalaDetalle.objects.select_related().filter(devuelto_sala=id_ds)
         d = DevueltoCama.objects.select_related().filter(devuelto_sala_detalle__in=dsd)
-        detalles = [(dd.cama.num_cama, dd.cama.historia_clinica, dd.producto, dd.producto.dosis, dd.producto.unidad, dd.cantidad_devuelta, dd.justificacion, dd.medico) for dd in d]
+        detalles = [(dd.cama.num_cama, dd.cama.historia_clinica, dd.producto, dd.producto.dosis, dd.producto.unidad_medida, dd.producto.unidad, dd.cantidad_devuelta, dd.justificacion, dd.medico) for dd in d]
         detalle_orden = Table([titulo] + [encabezados] + detalles)
         detalle_orden.setStyle(TableStyle([
             ('ALIGN', (0, 0), (3, 0), 'CENTER'),
-            ('SPAN', (0, 0), (7, 0)),
+            ('SPAN', (0, 0), (8, 0)),
             ('GRID', (0, 0), (-1, -1), 1, colors.black),
             ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('SPAN', (3, 1), (4, 1)),
         ]))
         return detalle_orden
 
@@ -1505,54 +1507,4 @@ class ReporteBajaCoberturaPDF(View):
             ('GRID', (0, 0), (-1, -1), 1, colors.black),
             ('FONTSIZE', (0, 0), (-1, -1), 8),
         ]))
-        return detalle_orden
-
-
-class ReporteFiltroImportePDF(View):
-
-    def get(self, request, *args, **kwargs):
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename = salida al centro de costo.pdf'
-        document = SimpleDocTemplate(response, pagesize=pagesizes.landscape(pagesizes.LETTER),)
-        story = []
-
-        story.append(self.tabla(request))
-        document.build(story, onFirstPage=bb, onLaterPages=bb)
-        return response
-
-    def tabla(self, request):
-        detalles = {}
-        titulo = ['SALIDA AL CENTRO DE COSTO', '', '', '', '', '', '', '']
-        encabezados = ['CÓDIGO', 'PRODUCTO', 'PRECIO', 'CANT. PEDIDOS', 'IMPORTE', 'CANT. DEVOLUCIONES', 'IMPORTE', 'SALDO']
-        form = FiltrarImporteForm(request.GET)
-        if form.is_valid():
-            ini_fecha = form.cleaned_data['inicio_fecha']
-            fin_fecha = form.cleaned_data['final_fecha']
-            centro_costo = form.cleaned_data['centro_costo']
-            peds = PedidoSala.objects.filter(sala__centro_costo=centro_costo)
-            peds = peds.filter(fecha_hora__range=(ini_fecha, fin_fecha))
-            peds = peds.exclude(despachado_por="")
-            psd = PedidoSalaDetalle.objects.select_related().filter(pedido_sala__in=peds)
-            devs = DevueltoSala.objects.filter(sala__centro_costo=centro_costo)
-            devs = devs.filter(fecha_hora__range=(ini_fecha, fin_fecha))
-            devs = devs.exclude(despachado_por="")
-            dsd = DevueltoSalaDetalle.objects.select_related().filter(devuelto_sala__in=devs)
-            for p in psd:
-                detalles.setdefault(p.producto, [0, 0])
-                detalles[p.producto][0] += p.cantidad_entregada
-            for d in dsd:
-                detalles.setdefault(d.producto, [0, 0])
-                detalles[d.producto][1] += d.cantidad_confirmada
-            ex = Existencia.objects.all()
-            for e in ex:
-                if d.producto.nombre == e.producto.nombre:
-                    saldo = e.todo
-            detalles1 = [[d.producto.codigo, d.producto.nombre, detalles[p.producto][0], d.producto.precio, detalles[d.producto][1], saldo]]
-            detalle_orden = Table([titulo] + [encabezados] + detalles1)
-            detalle_orden.setStyle(TableStyle([
-                ('ALIGN', (0, 0), (3, 0), 'CENTER'),
-                ('SPAN', (0, 0), (7, 0)),
-                ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                ('FONTSIZE', (0, 0), (-1, -1), 8),
-            ]))
         return detalle_orden

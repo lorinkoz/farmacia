@@ -70,18 +70,6 @@
                 </tbody>
 
             {% endfor %}
-            <tfoot class="full-width">
-            <tr>
-                <th colspan="12">
-                    <a href="{% url 'ReporteFiltroImportePDF' %}">
-                        <div style="background-color: #1AB99C" class="ui left floated small labeled icon button">
-                            <i class="print icon"></i>
-                            Imprimir
-                        </div>
-                    </a>
-                </th>
-            </tr>
-            </tfoot>
         </table>
     {% else %}
         <p>No hay datos disponibles.</p>
