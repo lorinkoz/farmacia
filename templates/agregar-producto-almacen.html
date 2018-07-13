@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+    <div class="ui middle aligned center aligned grid ">
+        <div id="add_dal" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img class="image" src="/static/image/Agregar%20producto1.png"/>
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+
+                    <div class="field">
+                        <label>Producto</label>
+
+                        <div class="ui left icon input">
+                            <select id="" class="ui fluid search dropdown" name="producto">
+                                {% for producto in productos %}
+                                    <option value="{{ producto.pk }}">{{ producto }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Cantidad Enviada</label>
+
+                        <div class="ui left icon input">
+                            {{ form.cantidad_enviada }}
+                            {{ form.cantidad_enviada.errors }}
+                        </div>
+                    </div>
+
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <button type="reset" class="ui button">Cancelar</button>
+                    </div>
+                </div>
+                <div class="ui large">
+                    <a class="ui fluid large button" href="{% url 'devolucionesFarmacia' %}">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

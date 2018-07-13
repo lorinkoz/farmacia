@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+    <div style="text-align: center;" class="ui middle aligned center aligned grid ">
+        <div style="max-width: 355px" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B; margin-bottom: 14px" class="ui image header">
+                    <img style="width: 220px" class="image" src="/static/image/Filtrar%20salida.png"/>
+                </h2>
+            </div>
+            <form method="GET" action="" class="ui large form">
+                <div class="ui stacked segment">
+
+                    <div class="field">
+                        <label>Centro de Costo</label>
+
+                        <input class="" type="text" value="" name="centro_costo">
+                    </div>
+
+                    <div class="field">
+                        <label>Fecha Inicial</label>
+
+                        <input id="ex2" class="" type="text" value="" name="inicio_fecha">
+                    </div>
+
+                    <div class="field">
+                        <label>Fecha Final</label>
+
+                        <input id="ex3" class="" type="text" value="" name="final_fecha">
+                    </div>
+                    <button style="background-color: #1AB99C" type="submit" class="ui fluid large submit button">
+                        Filtrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    {% if detalles %}
+
+        <table class="ui celled selectable table">
+            <thead>
+            <tr>
+                <th colspan="6" class="center aligned">SALIDA AL CENTRO DE COSTO "{{ centro_costo }}"</th>
+            </tr>
+            <tr>
+                <th class="center aligned">CÓDIGO</th>
+                <th class="center aligned">PRODUCTO</th>
+                <th class="center aligned">CANT. PEDIDOS</th>
+                <th class="center aligned">PRECIO</th>
+                <th class="center aligned">CANT. DEVOLUCIONES</th>
+                <th class="center aligned">SALDO</th>
+            </tr>
+            </thead>
+
+            {% for p, c in detalles.items %}
+                <tbody>
+                <tr>
+                    <td>{{ p.codigo }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ c.0 }}</td>
+                    <td>{{ p.precio }}</td>
+                    <td>{{ c.1 }}</td>
+                    <td>{{ p.existencia.todo|default:"NO HAY" }}</td>
+                </tr>
+                </tbody>
+
+            {% endfor %}
+            <tfoot class="full-width">
+            <tr>
+                <th colspan="12">
+                    <a href="{% url 'ReporteFiltroImportePDF' %}">
+                        <div style="background-color: #1AB99C" class="ui left floated small labeled icon button">
+                            <i class="print icon"></i>
+                            Imprimir
+                        </div>
+                    </a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    {% else %}
+        <p>No hay datos disponibles.</p>
+    {% endif %}
+
+{% endblock %}

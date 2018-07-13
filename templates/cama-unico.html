@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+    <h2 style="text-align: center; margin-bottom: 30px">INFORMACIÓN DEL PACIENTE</h2>
+
+    <div align="center">
+        <div class="ui card">
+            <div align="left" class="content">
+                <h4 style="color: rgba(0,0,0,.6)"><i style="color: #35BB9B"
+                                                     class="user icon"></i>{{ c.nombre }} {{ c.apellido1 }} {{ c.apellido2 }}
+                </h4>
+            </div>
+            <div class="image">
+                <img src="/static/image/user-login-icon-14.png">
+            </div>
+            <div class="content">
+                <span style="color: rgba(0,0,0,.6)" class="right floated"> <i style="color: #35BB9B"   class="hotel icon"></i>{{ c.num_cama }}</span>
+                <span style="color: rgba(0,0,0,.6)" class="left floated"><i style="color: #35BB9B" class="book icon"></i>{{ c.historia_clinica }}</span>
+                <span style="color: rgba(0,0,0,.6)" class="left floated"><i style="color: #35BB9B" class="calendar icon"></i>{{ c.fecha_hora }}</span>
+            </div>
+            <div class="extra content">
+                <div class="ui large">
+                    <a style="background-color: #35BB9B" class="ui fluid large submit button" href="{% url 'cama' %}">Regresar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

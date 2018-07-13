@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+    <h2 style="text-align: center; margin-bottom: 30px">SOLICITUDES DE REPOSICIÓN</h2>
+
+
+    {% if pedf %}
+
+        {% for pf  in pedf %}
+            <div class="ui grid">
+                <div class="four column centered row">
+                    <div class="ui left aligned raised segment">
+                        <table>
+                            <td>
+                                <h3 style="color: #676767">No. {{ pf.id }} - F.S: {{ pf.fecha_hora }}</h3>
+                            </td>
+                            <td style="text-align: right">
+                                {% if user.is_authenticated %}
+                                    <div class="ui icon buttons">
+                                        <a style="color: #00827c" class="ui compact button" data-inverted=""
+                                           data-tooltip="Recibir solicitud"
+                                           data-position="top center" href="{% url 'despachar_pedido_farmacia' pf.id%}"><i
+                                                class="write icon"> </i></a>
+                                        <a style="color: #00827c" class="ui compact button" data-inverted=""
+                                           data-tooltip="Eliminar solicitud"
+                                           data-position="right center" href="{% url 'eliminar_pedido_farmacia' pf.id%}"><i
+                                                class="remove icon"> </i></a>
+                                    </div>
+                                    </td>
+                                    </table>
+
+                                {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No hay solicitudes de reposición disponibles</p>
+    {% endif %}
+
+    {% block script %}
+
+    {% endblock %}
+
+{% endblock %}

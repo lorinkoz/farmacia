@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+    {% if formset %}
+        <form method="POST" action="" class="ui large form">
+            {% csrf_token %}
+
+            <table class="ui celled selectable table">
+                <thead>
+                <tr>
+                    <th colspan="2" class="left aligned">MOD 17-24 MINISTERIO DE SALUD PÚBLICA CONTROL</th>
+                    <th colspan="5" rowspan="2" class="center aligned"><h3>PEDIDO DE SALA</h3></th>
+                    <th colspan="2" class="left aligned">FECHA {{ form.instance.fecha_hora }}</th>
+                </tr>
+                <tr>
+                    <th colspan="2" class="left aligned">UNIDAD: H.U.C.Q</th>
+                    <th colspan="2" class="left aligned">CENTRO DE COSTO: {{ form.instance.sala.centro_costo }}</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="center aligned">RESUMEN DEL PEDIDO</td>
+                </tr>
+                <tr>
+                    <th rowspan="2" class="center aligned">CÓDIGO</th>
+                    <th rowspan="2" class="center aligned">PRODUCTO</th>
+                    <th rowspan="2" class="center aligned">DOSIS</th>
+                    <th rowspan="2" class="center aligned">UNIDAD</th>
+                    <th colspan="2" class="center aligned">CANTIDAD</th>
+                    <th rowspan="2" class="center aligned">PRECIO</th>
+                    <th rowspan="2" class="center aligned">IMPORTE</th>
+                    <th rowspan="2" class="center aligned">EXISTENCIA</th>
+                </tr>
+                <tr>
+                    <th class="center aligned">SOLICIT.</th>
+                    <th class="center aligned">ENTREG.</th>
+                </tr>
+                </thead>
+                {{ formset.management_form }}
+                {% for form  in formset %}
+                    <tbody>
+
+                    <tr>
+                        <td class="left aligned">{{ form.instance.producto.codigo }}</td>
+                        <td class="left aligned">
+                            {{ form.id }}
+                            {{ form.instance.producto }}
+                        </td>
+                        <td class="left aligned">{{ form.instance.producto.dosis }} {{ form.instance.producto.unidad_medida }}</td>
+                        <td class="left aligned">{{ form.instance.producto.unidad }}</td>
+                        <td class="left aligned">{{ form.instance.cantidad_solicitada }}</td>
+                        <td class="left aligned">{{ form.cantidad_entregada }} {{ form.cantidad_entregada.errors }}</td>
+                        <td class="left aligned">${{ form.instance.producto.precio }}</td>
+                        <td class="left aligned">${{ form.instance.importe }}</td>
+                        <td class="left aligned">{{ form.instance.producto.existencia.todo|default:"NO HAY" }}</td>
+
+
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2">SALA: {{ form.instance.sala }}</td>
+                    <td colspan="5" class="center aligned">TOTAL</td>
+                    <td class="left aligned">${{ form.instance.importe_total }}</td>
+                    <td class="left aligned"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">SOLICITADO POR: {{ form.instance.solicitado_por }}</td>
+                    <td colspan="2">APROBADO POR:{{ form.aprobado_por }}</td>
+                    <td colspan="2">DESPACHADO POR:{{ form.despachado_por }}</td>
+                    <td colspan="2">RECIBIDO POR:{{ form.recibido_por }}</td>
+                    <td>No. {{ form.instance.id }}</td>
+                </tr>
+                </tbody>
+
+                <tfoot class="full-width">
+                <tr>
+                    <th colspan="12">
+
+                        <a style="background-color: #4B89DA" class="ui compact button" data-inverted=""
+                           data-tooltip="Ver pedidos de cama asociados"
+                           data-position="top center" href="{% url 'pedidos_cama_relacionados' form.instance.id %}"><i
+                                class="unhide icon"> </i>
+                        </a>
+                        <button style="background-color: #35BB9B" type="submit" class="ui compact button"
+                                data-inverted=""
+                                data-tooltip="Despachar pedido"
+                                data-position="right center"><a href=""><i class="plus icon"> </i></a>
+                        </button>
+                        <a href="{% url 'pedidosSala' %}">
+                            <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                                <i class="undo icon"></i>
+                                Regresar
+                            </div>
+                        </a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </form>
+    {% else %}
+        <p>No hay pedidos disponibles.</p>
+    {% endif %}
+
+{% endblock %}

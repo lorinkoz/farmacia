@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+    <div class="ui middle aligned center aligned grid ">
+        <div id="add_cant_pro" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img style="width: 240px" class="image" src="/static/image/Editar%20existencia.png"/>
+                </h2>
+            </div>
+
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <label>Producto</label>
+
+                        <div class="ui left icon input">
+                            {{ form.producto }}
+                            {{ form.producto.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Cantidad</label>
+
+                        <div class="ui left icon input">
+                            {{ form.todo }}
+                            {{ form.todo.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Fondo Fijo</label>
+
+                        <div class="ui left icon input">
+                            {{ form.fondo_fijo }}
+                            {{ form.fondo_fijo.errors }}
+                        </div>
+                    </div>
+
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <a href="{% url 'existencia' %}">
+                            <button class="ui button">Regresar</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+{% endblock %}

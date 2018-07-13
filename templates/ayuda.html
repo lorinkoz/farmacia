@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+    <h2 style="text-align: center; margin-bottom: 30px">MANUAL DE USUARIO</h2>
+
+     <div align="center">
+    <div align="left" class="ui styled accordion">
+        <div class="title" style="color: #1AB99C">
+            <i class="dropdown icon"></i>
+             <span>¿Cómo realizar las funciones de una Jefa de salón? </span>
+        </div>
+        <div class="content">
+            <p class="transition hidden">
+            <h5>Agregar cama</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Camas" y pulsar el botón "Agregar"</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Guardar" para crear una nueva cama</li>
+            </ol>
+            <h5>Editar cama</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Camas" y pulsar el botón "Editar cama" de la cama escogida</li>
+                <li>Modificar la información requerida y pulsar el botón "Guardar" para establecer los cambios</li>
+            </ol>
+            <h5>Visualizar información de cama</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Camas" y pulsar el botón "Ver cama" de la cama escogida</li>
+                <li>Pulsar el botón "regresar" para volver a la interfaz anterior</li>
+            </ol>
+            <h5>Eliminar cama</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Camas" y pulsar el botón "Eliminar"</li>
+                <span>Nota: Se elimina la última cama</span>
+            </ol>
+            <h5>Solicitar medicamento</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Camas" y pulsar el botón "Pedir medicamentos" de la cama escogida</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Guardar" para crear un nuevo pedido</li>
+                <span>Nota: Pulsar el botón "regresar" si se quiere hacer el mismo procedimiento con otra cama</span>
+                <li>Dirigirse a la interfaz "Pedidos de Cama"</li>
+                <span>Nota: Pulsar el botón "Eliminar pedido" o "Editar pedido" en caso de equivocación</span>
+                <li>Pulsar el botón "Solicitar" para mandarle un "Pedido de Sala" a la farmacia</li>
+            </ol>
+            <h5>Devolver medicamento</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Camas" y pulsar el botón "Devolver medicamentos" de la cama escogida</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Guardar" para crear una nueva devolución
+                </li>
+                <span>Nota: Pulsar el botón "regresar" si se quiere hacer el mismo procedimiento con otra cama</span>
+                <li>Dirigirse a la interfaz "Devoluciones de Cama"</li>
+                <span>Nota: Pulsar el botón "Eliminar devolución" o "Editar devolución" en caso de equivocación</span>
+                <li>Pulsar el botón "Solicitar" para mandarle una "Devolución de Sala" a la farmacia</li>
+            </ol>
+            <h5>Buscar</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Buscar"</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Buscar" para realizar una búsqueda</li>
+                <span>Nota: Se mostrará la información en caso de coincidir con los datos ingresados</span>
+                <li>Pulsar el botón "Observar" de la solicitud escogida</li>
+                <span>Nota: Se mostrará la información demandada</span>
+                <li>Pulsar el botón "Ver pedidos de cama asociados" para visualizar las solicitudes individuales por
+                    cama
+                </li>
+            </ol>
+            </p>
+        </div>
+        <div class="title" style="color: #1AB99C">
+            <i class="dropdown icon"></i>
+             <span>¿Cómo realizar las funciones del Jefe de Dpto. de farmacia? </span>
+        </div>
+        <div class="content">
+            <p class="transition hidden">
+            <h5>Agregar medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Productos" y pulsar el botón "Agregar"</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Guardar" para agregar el medicamento al
+                    sistema
+                </li>
+            </ol>
+            <h5>Editar medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Productos" y pulsar el botón "Editar producto" del medicamento escogido
+                </li>
+                <li>Modificar la información requerida y pulsar el botón "Guardar" para establecer los cambios</li>
+            </ol>
+            <h5>Eliminar medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Productos"</li>
+                <li>Pulsar el botón "Eliminar producto" del medicamento escogido</li>
+            </ol>
+            <h5>Abastecer farmacia de medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Abastecer"</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Guardar" para agregar el medicamento a la
+                    existencia de la farmacia
+                </li>
+            </ol>
+            <h5>Editar existencia de medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Existencia"</li>
+                <li>Pulsar el botón "Editar existencia", modificar la información y pulsar el botón "Guardar"</li>
+            </ol>
+            <h5>Eliminar existencia de medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Existencia"</li>
+                <li>Pulsar el botón "Eliminar existencia"</li>
+            </ol>
+            <h5>Solicitar reposición de medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Baja Cobertura"</li>
+                <li>Pulsar el botón "Solicitar" para mandar la solicitud al Almacén de medicamentos</li>
+            </ol>
+            <h5>Solicitar devolución de medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Devoluciones"</li>
+                <li>Pulsar el botón "Agregar" para crear un nuevo modelo de solicitud</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Guardar" para crear una nueva devolución
+                </li>
+                <li>Pulsar el botón "Solicitar" mandar la solicitud al Almacén de medicamentos</li>
+            </ol>
+            </p>
+        </div>
+        <div class="title active" style="color: #1AB99C">
+            <i class="dropdown icon"></i>
+             <span>¿Cómo realizar las funciones de un farmacéutico? </span>
+        </div>
+        <div class="content active">
+            <p class="transition visible" style="display: block !important;">
+            <h5>Despachar pedido de sala</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Pedidos de Sala"</li>
+                <li>Pulsar el botón "Recibir pedido" del pedido de sala escogido</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Despachar pedido" para realizar el
+                    despacho
+                </li>
+            </ol>
+            <h5>Despachar devolución de sala</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Devoluciones de Sala"</li>
+                <li>Pulsar el botón "Recibir devolución" de la devolución de sala escogida</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Recibir devolución" para realizar el
+                    despacho
+                </li>
+            </ol>
+            </p>
+        </div>
+        <div class="title" style="color: #1AB99C">
+            <i class="dropdown icon"></i>
+             <span>¿Cómo realizar las funciones de un almacenero ? </span>
+        </div>
+        <div class="content">
+            <p class="transition hidden">
+            <h5>Despachar solicitud de reposición</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Solicitudes de Reposición"</li>
+                <li>Pulsar el botón "Recibir solicitud" de la solicitud de reposición escogida</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Despachar solicitud" para realizar el
+                    despacho
+                </li>
+            </ol>
+            <h5>Despachar solicitud de devolución</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Solicitudes de Devolución"</li>
+                <li>Pulsar el botón "Recibir solicitud" de la solicitud de devolución escogida</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Recibir devolución" para realizar el
+                    despacho
+                </li>
+            </ol>
+            </p>
+        </div>
+        <div class="title" style="color: #1AB99C">
+            <i class="dropdown icon"></i>
+             <span>¿Cómo realizar las funciones del Jefe de Dpto. de contabilidad? </span>
+        </div>
+        <div class="content">
+            <p class="transition hidden">
+            <h5>Editar medicamentos</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Productos" y pulsar el botón "Editar producto" del medicamento escogido
+                </li>
+                <li>Modificar la información requerida y pulsar el botón "Guardar" para establecer los cambios</li>
+            </ol>
+            </p>
+        </div>
+        <div class="title" style="color: #1AB99C">
+            <i class="dropdown icon"></i>
+             <span>¿Cómo realizar las funciones de un contador? </span>
+        </div>
+        <div class="content">
+            <p class="transition hidden">
+            <h5>Cierre de productos solicitados</h5>
+            <ol>
+                <li>Dirigirse a la interfaz "Salida al Centro de Costo"</li>
+                <li>Rellenar los campos correspondientes y pulsar el botón "Filtrar" para realizar la consulta</li>
+            </ol>
+            </p>
+        </div>
+    </div>
+     </div>
+
+{% endblock %}

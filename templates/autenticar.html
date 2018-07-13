@@ -1,0 +1,37 @@
+{% extends 'base-login.html' %}
+{% block contenido %}
+
+    <div class="ui middle aligned center aligned grid ">
+        <div style="justify-content: center; align-items: center" class="column">
+            <div style="text-align: left" class="column">
+                <h2 class="ui teal image header">
+                    <img class="image" src="/static/image/login_final.png"/>
+
+
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form error">
+                {% csrf_token %}
+
+                <div class="ui raised segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            {{ form.username }}
+                            {{ form.username.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            {{ form.password }}
+                            {{ form.password.errors }}
+                        </div>
+                    </div>
+                    <button style="background-color: #00827c" type="submit" class="ui fluid large submit button">
+                        Autenticar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

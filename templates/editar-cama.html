@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    <div class="ui middle aligned center aligned grid ">
+        <div id="edit_cama" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img class="image" src="/static/image/Editar%20cama.png"/>
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+                    <a href="{% url 'cama' %}" style="background-color: #1AB99C" class="ui right ribbon label"><i
+                            class="hotel icon"> {{ form.instance.num_cama }}</i></a>
+
+                    <div class="field">
+                        <label>Historia Clínica</label>
+
+                        <div class="ui left icon input">
+                            {{ form.historia_clinica }}
+                            {{ form.historia_clinica.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Nombre</label>
+
+                        <div class="ui left icon input">
+                            {{ form.nombre }}
+                            {{ form.nombre.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Primer Apellido</label>
+
+                        <div class="ui left icon input">
+                            {{ form.apellido1 }}
+                            {{ form.apellido1.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Segundo Apellido</label>
+
+                        <div class="ui left icon input">
+                            {{ form.apellido2 }}
+                            {{ form.apellido2.errors }}
+                        </div>
+                    </div>
+
+                    <div class="ui buttons">
+                        <button style="background-color: #1AB99C" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <a href="{% url 'cama' %}">
+                            <button class="ui button">Regresar</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+{% endblock %}

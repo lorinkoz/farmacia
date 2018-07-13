@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+    <h2 style="text-align: center; margin-bottom: 30px">EXISTENCIA</h2>
+
+    {% if ex %}
+
+        {% for cura in ex %}
+            <div class="ui grid">
+                <div class="four column centered row">
+
+
+                    <h4 style="text-align: left">{% if request.user == pglobal.jefe_farmacia %}
+                        <a data-inverted="" data-tooltip="Editar existencia"
+                           data-position="top center" href="{% url 'editar_cantidad_medicamentos' cura.id %}"><i
+                                style="color: #000000" class="edit icon"> </i></a>
+                    {% endif %}{{ cura.producto }}  {% if request.user == pglobal.jefe_farmacia%}
+                        <a data-inverted="" data-tooltip="Eliminar existencia"
+                           data-position="top center"
+                           href="{% url 'eliminar_cantidad_medicamentos' cura.id %}"><i
+                                style="color: #000000" class="remove icon"> </i></a>{% endif %}</h4>
+
+                    <div class="ui indicating progress active" data-percent="{{ cura.porciento }}" id="example5">
+                        <div class="bar" style="width: {{ cura.porciento }}%; transition-duration: 300ms;">
+                            <div class="progress">{{ cura.porciento }}%</div>
+                        </div>
+
+                        {% if user.is_staff %}
+                            <div class="label">{{ cura.todo }} unidades</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    {% else %}
+        <p>No se ha abastecido de medicamentos</p>
+    {% endif %}
+    <script>
+        $('#example5').progress();
+    </script>
+
+{% endblock %}

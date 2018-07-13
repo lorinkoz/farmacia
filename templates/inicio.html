@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+    <style>
+        @media screen and (max-width: 1366px) {
+            .ui.attached:not(.message) + .ui.attached.segment:not(.top) {
+                background: white url("../static/image/11.png") no-repeat right bottom;
+            }
+        }
+
+        @media (min-width: 1367px) and (max-width: 2000px) {
+            .ui.attached:not(.message) + .ui.attached.segment:not(.top) {
+                background: white url("../static/image/1.png") no-repeat right bottom;
+            }
+        }
+    </style>
+
+    <div class="">
+        <div align="center">
+            <img id="lucia" class="image" src="../static/image/Artboard%2011%20copy.png"/>
+        </div>
+        <div style="justify-content: center; align-items: center" class="ui large statistics">
+            <div class="statistic">
+                <div style="color: #ffffff" class="value">
+                    {{ info_p }}
+                </div>
+                <div style="color: #ffffff" class="label">
+                    Productos
+                </div>
+            </div>
+            <div class="statistic">
+                <div style="color: #ffffff" class="value">
+                    {{ info_ps }}
+                </div>
+                <div style="color: #ffffff" class="label">
+                    Pedidos
+                </div>
+            </div>
+            <div class="statistic">
+                <div style="color: #ffffff" class="value">
+                    {{ info_ds }}
+                </div>
+                <div style="color: #ffffff" class="label">
+                    Devoluciones
+                </div>
+            </div>
+        </div>
+
+        <h1 style="text-align: center; color: #ffffff">"regalando esperanzas, esperando bienestar"</h1>
+
+    </div>
+
+{% endblock %}

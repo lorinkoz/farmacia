@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+    <div class="ui middle aligned center aligned grid ">
+        <div id="edit_jus" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img style="width: 280px" class="image" src="/static/image/Editar%20justificación.png"/>
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+
+                    <div class="field">
+                        <label>Nombre</label>
+
+                        <div class="ui left icon input">
+                            {{ form.nombre }}
+                            {{ form.nombre.errors }}
+                        </div>
+                    </div>
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <a href="{% url 'agregar_devuelto_cama' id_c %}">
+                            <button class="ui button">Regresar</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+    <div class="ui middle aligned center aligned grid ">
+        <div id="add_pro" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img style="width: 240px" class="image" src="/static/image/Agregar%20producto1.png"/>
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+
+                <div class="ui stacked segment">
+
+                    <div class="field">
+                        <label>Nombre</label>
+
+                        <div class="ui left icon input">
+                            {{ form.nombre }}
+                            {{ form.nombre.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Dosis</label>
+
+                        <div class="two fields">
+                            <div class="field">
+                                {{ form.dosis }}
+                                {{ form.dosis.errors }}
+                            </div>
+                            <div class="field">
+                                <select id="um" class="ui fluid search dropdown" name="unidad_medida">
+                                    {% for um in unidadMed %}
+                                        <option value="{{ um.pk }}">{{ um }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <a onclick="obtener_um()" class="" href="javascript:void()"><i style="color: #4B89DA"
+                                                                                           class="write icon"> </i>
+                            </a>
+                            <a class="" href="{% url 'agregar_unidad_medida' %}"><i style="color: #35BB9B"
+                                                                                    class="plus icon"> </i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Unidad</label>
+
+                        <div class="two fields">
+                            <div style="width: 900px" class="field">
+                                <select id="pr" class="ui fluid search dropdown" name="unidad">
+                                    {% for pre in presentacion %}
+                                        <option value="{{ pre.pk }}">{{ pre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <a onclick="obtener_pre()" class="" href="javascript:void()"><i style="color: #4B89DA"
+                                                                                            class="write icon"> </i>
+                            </a>
+                            <a class="" href="{% url 'agregar_presentacion' %}"><i style="color: #35BB9B"
+                                                                                   class="plus icon"> </i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Código</label>
+
+                        <div class="ui left icon input">
+                            {{ form.codigo }}
+                            {{ form.codigo.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Precio</label>
+
+                        <div class="ui left icon input">
+                            {{ form.precio }}
+                            {{ form.precio.errors }}
+                        </div>
+                    </div>
+
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <button type="reset" class="ui button">Cancelar</button>
+                    </div>
+                </div>
+                <div class="ui large">
+                    <a class="ui fluid large button" href="{% url 'producto' %}">Regresar</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

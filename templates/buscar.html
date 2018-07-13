@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+    <div style="text-align: center;" class="ui middle aligned center aligned grid " xmlns="http://www.w3.org/1999/html">
+        <div id="buscar" style="max-width: 355px" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B; margin-bottom: 14px" class="ui image header">
+                    <img style="width: 240px" class="image" src="/static/image/Buscar%20solicitudes.png"/>
+                </h2>
+            </div>
+            <form method="GET" action="" class="ui large form">
+                <div class="ui stacked segment">
+
+                    <div class="field">
+
+                        <label>Servicio</label>
+
+                        <select id="" class="ui fluid search dropdown" name="sala">
+                            {% for s in sala %}
+                                <option value="{{ s.pk }}">{{ s }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+
+                        <label>Solicitud</label>
+
+                        <div class="ui left icon input">
+                            {{ form.tipo_solicitud }}
+                            {{ form.tipo_solicitud.errors }}
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <input id="ex" class="" type="text" value="{{ request.GET.inicio_fecha }}"
+                                   name="inicio_fecha" placeholder="fecha inicial">
+                        </div>
+                        <div class="field">
+                            <input id="ex1" class="" type="text" value="{{ request.GET.final_fecha }}"
+                                   name="final_fecha" placeholder="fecha final">
+                        </div>
+                    </div>
+                    <button style="background-color: #1AB99C" type="submit" class="ui fluid large submit button">
+                        Buscar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    {% if peds or devs or pedf or devf %}
+
+        {% for ps  in peds %}
+            <div class="ui grid">
+                <div class="four column centered row">
+                    <div class="ui left aligned raised segment">
+                        <table>
+                            <td>
+                                <h3 style="color: #676767">Sala: {{ ps.sala }} - C.Costo: {{ ps.sala.centro_costo }} -
+                                    #/p: {{ ps.id }}</h3>
+                            </td>
+                            <td>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'despachar_pedido_sala' ps.id %}">
+                                        <div style="background-color: #1AB99C"
+                                             class="ui right floated small labeled icon button">
+                                            <i class="unhide icon"></i>
+                                            Observar
+                                        </div>
+                                    </a>
+                                    </td>
+                                    </table>
+
+                                {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+
+        {% for ds  in devs %}
+            <div class="ui grid">
+                <div class="four column centered row">
+                    <div class="ui left aligned raised segment">
+                        <table>
+                            <td>
+                                <h3 style="color: #676767">Sala: {{ ds.sala }} - C.Costo: {{ ds.sala.centro_costo }} -
+                                    #/d: {{ ds.id }}</h3>
+                            </td>
+                            <td>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'despachar_devuelto_sala' ds.id %}">
+                                        <div style="background-color: #1AB99C"
+                                             class="ui right floated small labeled icon button">
+                                            <i class="unhide icon"></i>
+                                            Observar
+                                        </div>
+                                    </a>
+                                    </td>
+                                    </table>
+
+                                {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+        {% for pf  in pedf %}
+            <div class="ui grid">
+                <div class="four column centered row">
+                    <div class="ui left aligned raised segment">
+                        <table>
+                            <td>
+                                <h3 style="color: #676767">No. {{ pf.id }} - F.R: {{ pf.fecha_hora }}</h3>
+                            </td>
+                            <td>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'despachar_pedido_farmacia' pf.id %}">
+                                        <div style="background-color: #1AB99C"
+                                             class="ui right floated small labeled icon button">
+                                            <i class="unhide icon"></i>
+                                            Observar
+                                        </div>
+                                    </a>
+                                    </td>
+                                    </table>
+
+                                {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+        {% for df  in devf %}
+            <div class="ui grid">
+                <div class="four column centered row">
+                    <div class="ui left aligned raised segment">
+                        <table>
+                            <td>
+                                <h3 style="color: #676767">No. {{ df.id }} - F.D: {{ df.fecha_hora }}</h3>
+                            </td>
+                            <td>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'despachar_devuelto_farmacia' df.id %}">
+                                        <div style="background-color: #1AB99C"
+                                             class="ui right floated small labeled icon button">
+                                            <i class="unhide icon"></i>
+                                            Observar
+                                        </div>
+                                    </a>
+                                    </td>
+                                    </table>
+
+                                {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No hay resultados disponibles para este servicio</p>
+    {% endif %}
+
+{% endblock %}

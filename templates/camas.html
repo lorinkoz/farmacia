@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+    <h2 style="text-align: center; margin-bottom: 30px">{{ s }}</h2>
+
+
+    {% if c %}
+
+        {% for cc  in c %}
+            <div class="ui grid">
+                <div class="four column centered row">
+                    <div class="ui left aligned raised segment">
+                        <table>
+                            <td>
+                                <h3 style="color: #676767">Cama: {{ cc.num_cama }} - H.C: {{ cc.historia_clinica }}</h3>
+                            </td>
+                            <td style="text-align: right">
+                                {% if user.is_authenticated %}
+                                    <div class="ui icon buttons">
+                                        <a class="ui compact button" data-inverted="" data-tooltip="Ver cama"
+                                           data-position="left center" href="{% url 'cama_unico' cc.id%}"><i
+                                                style="color: #00827c" class="unhide icon"> </i></a>
+                                        <a class="ui compact button" data-inverted="" data-tooltip="Editar cama"
+                                           data-position="top center" href="{% url 'editar_cama' cc.id%}"><i
+                                                style="color: #00827c" class="edit icon"> </i></a>
+                                        <a class="ui compact button" data-inverted="" data-tooltip="Pedir medicamentos"
+                                           data-position="bottom center" href="{% url 'agregar_pedido_cama' cc.id%}"><i
+                                               style="color: #00827c" class="write icon"> </i></a>
+                                        <a class="ui compact button" data-inverted="" data-tooltip="Devolver medicamentos"
+                                           data-position="right center" href="{% url 'agregar_devuelto_cama' cc.id%}"><i
+                                                style="color: #00827c" class="write icon"> </i></a>
+                                    </div>
+                                    </td>
+                                    </table>
+
+                                {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="botones">
+
+            <a id="clean_cama" class="item" >
+                <div id="b" style="background-color: #D94452" class="ui right floated small labeled icon button">
+                    <i class="remove user icon"></i>
+                    Eliminar
+                </div>
+            </a>
+            <a href="{% url 'agregar_cama' %}">
+                <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                    <i class="add user icon"></i>
+                    Agregar
+                </div>
+            </a>
+        </div>
+
+         <div class="ui basic modal">
+                    <div style="color: green" class="ui icon header">
+                        <i class="help circle icon"></i>
+                        Mensaje de verificación
+                    </div>
+                    <div class="content">
+                        <p style="text-align: center">¿Está seguro que desea realizar esta acción?</p>
+                    </div>
+                    <div class="actions">
+                        <div class="ui red basic cancel inverted button">
+                            <i class="remove icon"></i>
+                            No
+                        </div>
+                        <div class="ui green ok inverted button"><a class=""
+                                                                    href="{% url 'eliminar_cama' %}"><i
+                                class="checkmark icon"></i>
+                            Si</a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+    {% else %}
+        <p>No hay camas disponibles.</p>
+
+            <a href="{% url 'agregar_cama' %}">
+                <div id="c" style="background-color: #35BB9B" class="ui left floated small labeled icon button">
+                    <i class="plus icon"></i>
+                    Agregar
+                </div>
+            </a>
+
+    {% endif %}
+
+
+
+
+    {% block script %}
+
+    {% endblock %}
+
+{% endblock %}

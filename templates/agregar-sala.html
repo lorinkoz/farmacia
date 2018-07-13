@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+    <div class="ui middle aligned center aligned grid ">
+        <div id="add_sala" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img class="image" src="/static/image/Agregar%20servicio.png"/>
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <label>Servicio</label>
+
+                        <div class="ui left icon input">
+                            {{ form.servicio }}
+                            {{ form.servicio.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Sala</label>
+
+                        <div class="ui left icon input">
+                            {{ form.apodo }}
+                            {{ form.apodo.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Centro de Costo</label>
+
+                        <div class="ui left icon input">
+                            {{ form.centro_costo }}
+                            {{ form.centro_costo.errors }}
+                        </div>
+
+                    </div>
+
+                    <div class="field">
+                        <label>Secretaria</label>
+
+                        <div class="ui left icon input">
+                            {{ form.secretaria }}
+                            {{ form.secretaria.errors }}
+                        </div>
+                    </div>
+
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <button type="reset" class="ui button">Cancelar</button>
+                    </div>
+                </div>
+                <div class="ui large">
+                    <a class="ui fluid large button" href="{% url 'sala' %}">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

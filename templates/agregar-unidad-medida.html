@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+    <div class="ui middle aligned center aligned grid ">
+        <div id="add_pre" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img style="width: 340px" class="image" src="/static/image/Agregar%20unidad%20de%20M.png"/>
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+
+                    <div class="field">
+                        <label>Nombre</label>
+
+                        <div class="ui left icon input">
+                            {{ form.nombre }}
+                            {{ form.nombre.errors }}
+                        </div>
+                    </div>
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <button type="reset" class="ui button">Cancelar</button>
+                    </div>
+                </div>
+                <div class="ui large">
+                    <a class="ui fluid large button" href="{% url 'agregar_producto' %}">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

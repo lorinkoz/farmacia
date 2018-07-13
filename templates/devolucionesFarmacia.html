@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h2 style="text-align: center; margin-bottom: 30px">DEVOLUCIONES</h2>
+
+    {% if ddf %}
+
+        <table class="ui celled selectable table">
+            <thead>
+
+            <tr>
+                <th class="center aligned">CÓDIGO</th>
+                <th class="center aligned">DESCRIPCIÓN</th>
+                <th class="center aligned">UM</th>
+                <th class="center aligned">CANTIDAD</th>
+                <th class="center aligned">PRECIO</th>
+                <th class="center aligned"><i class="database icon"></i></th>
+            </tr>
+            </thead>
+            {% for d  in ddf %}
+                <tbody>
+                <tr>
+                    <td>{{ d.producto.codigo }}</td>
+                    <td>{{ d.producto.nombre }}</td>
+                    <td>{{ d.producto.unidad }}</td>
+                    <td>{{ d.cantidad_enviada }}</td>
+                    <td>{{ d.producto.precio }}</td>
+
+                    <td class="collapsing">
+                        {% if user.is_authenticated %}
+
+                            <a style="background-color: #4B89DA" class="ui compact button" data-inverted=""
+                               data-tooltip="Editar devolución"
+                               data-position="top center" href="{% url 'editar_producto_almacen' d.id %}"><i
+                                    class="edit icon"> </i></a>
+                            <a style="background-color: #D94452" class="ui compact button" data-inverted=""
+                               data-tooltip="Eliminar devolución"
+                               data-position="bottom center" href="{% url 'eliminar_producto_almacen' d.id %}"><i
+                                    class="remove icon"> </i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            {% endfor %}
+            <tfoot class="full-width">
+            <tr>
+                <th colspan="12">
+                     <a href="{% url 'agregar_producto_almacen' %}">
+                        <div style="background-color: #35BB9B" class="ui left floated small labeled icon button">
+                            <i class="plus icon"></i>
+                            Agregar
+                        </div>
+                    </a>
+                    <a id="sol_dev_farma" class="item">
+                        <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                            <i class="send icon"></i>
+                            Solicitar
+                        </div>
+                    </a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+
+
+          <div class="ui basic modal">
+                    <div style="color: green" class="ui icon header">
+                        <i class="help circle icon"></i>
+                        Mensaje de verificación
+                    </div>
+                    <div class="content">
+                        <p style="text-align: center; color: green">¿Está seguro que desea realizar esta acción?</p>
+                    </div>
+                    <div class="actions">
+                        <div class="ui red basic cancel inverted button">
+                            <i class="remove icon"></i>
+                            No
+                        </div>
+                        <div class="ui green ok inverted button"><a class=""
+                                                                   href="{% url 'solicitar_devuelto_farmacia'%}"><i
+                                class="checkmark icon"></i>
+                            Si</a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+    {% else %}
+        <p>No hay solicitudes de devolución disponibles</p>
+
+        <a href="{% url 'agregar_producto_almacen' %}">
+                        <div id="f" style="background-color: #35BB9B" class="ui left floated small labeled icon button">
+                            <i class="plus icon"></i>
+                            Agregar
+                        </div>
+                    </a>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+    <h2 style="text-align: center; margin-bottom: 30px">DEVOLUCIONES DE CAMA</h2>
+
+    {% if d %}
+
+        <table class="ui celled selectable table">
+            <thead>
+            <tr>
+                <th class="center aligned">CAMA No.</th>
+                <th class="center aligned">HISTORIA CLÍNICA</th>
+                <th class="center aligned">PRODUCTO</th>
+                <th class="center aligned">DOSIS</th>
+                <th class="center aligned">UNIDAD</th>
+                <th class="center aligned">CANTIDAD</th>
+                <th class="center aligned">JUSTIFICACIÓN</th>
+                <th class="center aligned">MÉDICO</th>
+                <th class="center aligned"><i class="database icon"></i></th>
+            </tr>
+            </thead>
+            {% for dev  in d %}
+                <tbody>
+                <tr>
+                    <td>{{ dev.cama.num_cama }}</td>
+                    <td>{{ dev.cama.historia_clinica }}</td>
+                    <td>{{ dev.producto }}</td>
+                    <td>{{ dev.producto.dosis }} {{ dev.producto.unidad_medida }}</td>
+                    <td>{{ dev.producto.unidad }}</td>
+                    <td>{{ dev.cantidad_devuelta }}</td>
+                    <td>{{ dev.justificacion.nombre }}</td>
+                    <td>{{ dev.medico }}</td>
+
+                    <td class="collapsing">
+                        {% if user.is_authenticated %}
+
+                            <a style="background-color: #4B89DA" class="ui compact button" data-inverted=""
+                               data-tooltip="Editar devolución"
+                               data-position="top center" href="{% url 'editar_devuelto_cama' dev.id %}"><i
+                                    class="edit icon"> </i></a>
+                            <a style="background-color: #D94452" class="ui compact button" data-inverted=""
+                               data-tooltip="Eliminar devolución"
+                               data-position="bottom center" href="{% url 'eliminar_devuelto_cama' dev.id %}"><i
+                                    class="remove icon"> </i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            {% endfor %}
+            <tfoot class="full-width">
+            <tr>
+                <th colspan="12">
+                    <a id="sol_dev_sala" class="item">
+                        <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                            <i class="send icon"></i>
+                            Solicitar
+                        </div>
+                    </a>
+                    <a href="{% url 'cama' %}">
+                        <div style="background-color: #35BB9B" class="ui left floated small labeled icon button">
+                            <i class="undo icon"></i>
+                            Regresar
+                        </div>
+                    </a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+
+        <div class="ui basic modal">
+            <div style="color: green" class="ui icon header">
+                <i class="help circle icon"></i>
+                Mensaje de verificación
+            </div>
+            <div class="content">
+                <p style="text-align: center; color: green">¿Estás seguro que desea realizar esta acción?</p>
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    No
+                </div>
+                <div class="ui green ok inverted button"><a class=""
+                                                            href="{% url 'solicitar_devuelto_sala' %}"><i
+                        class="checkmark icon"></i>
+                    Si</a>
+
+                </div>
+            </div>
+
+        </div>
+
+    {% else %}
+        <p>No hay devoluciones de cama disponibles</p>
+
+        <a href="{% url 'cama' %}">
+            <div style="background-color: #35BB9B" class="ui left floated small labeled icon button">
+                <i class="undo icon"></i>
+                Regresar
+            </div>
+        </a>
+    {% endif %}
+
+{% endblock %}
+
+

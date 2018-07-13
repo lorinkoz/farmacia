@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+    {% if dsd %}
+        <form method="POST" action="" class="ui large form">
+            {% csrf_token %}
+
+            <table class="ui celled selectable table">
+                <thead>
+                <tr>
+                    <th colspan="2" class="left aligned">MOD 17-24 MINISTERIO DE SALUD PÚBLICA CONTROL</th>
+                    <th colspan="5" rowspan="2" class="center aligned"><h2 style="color: #000000">DEVOLUCIÓN DE
+                        SALA</h2></th>
+                    <th colspan="2" class="left aligned">FECHA {{ devs.fecha_hora }}</th>
+                </tr>
+                <tr>
+                    <th colspan="2" class="left aligned">UNIDAD: H.U.C.Q</th>
+                    <th colspan="2" class="left aligned">C.COSTO: {{ devs.sala.centro_costo }}</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="center aligned">RESUMEN DE LA DEVOLUCIÓN</td>
+                </tr>
+                <tr>
+                    <th rowspan="2" class="center aligned">CÓDIGO</th>
+                    <th rowspan="2" class="center aligned">PRODUCTO</th>
+                    <th rowspan="2" class="center aligned">DOSIS</th>
+                    <th rowspan="2" class="center aligned">UNIDAD</th>
+                    <th colspan="2" class="center aligned">CANTIDAD</th>
+                    <th rowspan="2" class="center aligned">PRECIO</th>
+                    <th rowspan="2" class="center aligned">IMPORTE</th>
+                    <th rowspan="2" class="center aligned">SALDO</th>
+                </tr>
+                <tr>
+                    <th class="center aligned">DEVUELT.</th>
+                    <th class="center aligned">CONFIRM.</th>
+                </tr>
+                </thead>
+                {% for ds  in dsd %}
+                    <tbody>
+
+                    <tr>
+                        <td class="left aligned">{{ ds.producto.codigo }}</td>
+                        <td class="left aligned">
+                            {{ ds.producto }}
+                        </td>
+                        <td class="left aligned">{{ ds.producto.dosis }} {{ ds.producto.unidad_medida }}</td>
+                        <td class="left aligned">{{ ds.producto.unidad }}</td>
+                        <td class="left aligned">{{ ds.cantidad_devuelta }}</td>
+                        <td class="left aligned">{{ ds.cantidad_confirmada }}</td>
+                        <td class="left aligned">${{ ds.producto.precio }}</td>
+                        <td class="left aligned">${{ ds.importe }}</td>
+                        <td class="left aligned">{{ ds.saldo }}</td>
+
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2">SALA: {{ devs.sala }}</td>
+                    <td colspan="5" class="center aligned">TOTAL</td>
+                    <td class="left aligned">${{ devs.importe_total }}</td>
+                    <td class="left aligned"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">DEVUELTO POR: {{ devs.devuelta_por }}</td>
+                    <td colspan="2">APROBADO POR: {{ devs.aprobado_por }}</td>
+                    <td colspan="2">DESPACHADO POR: {{ devs.despachado_por }}</td>
+                    <td colspan="2">RECIBIDO POR: {{ devs.recibida_por }}</td>
+                    <td>No. {{ devs.id }}</td>
+                </tr>
+                </tbody>
+
+                <tfoot class="full-width">
+                <tr>
+                    <th colspan="12">
+
+                        <a style="background-color: #1AB99C" class="ui compact button" data-inverted=""
+                           data-tooltip="Ver devoluciones de cama asociados"
+                           data-position="top center" href="{% url 'devueltos_cama_relacionados' id_ds %}">
+                            <i class="unhide icon"> </i>
+                        </a>
+                        <a style="background-color: #4B89DA" class="ui compact button" data-inverted=""
+                           data-tooltip="Imprimir devolución"
+                           data-position="right center" href="{% url 'ReporteDevueltoSalaPDF' id_ds %}">
+                            <i class="print icon"> </i>
+                        </a>
+                         <a href="{% url 'buscar' %}">
+                            <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                                <i class="undo icon"></i>
+                                Regresar
+                            </div>
+                        </a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </form>
+    {% else %}
+        <p>No hay devoluciones disponibles</p>
+    {% endif %}
+
+{% endblock %}

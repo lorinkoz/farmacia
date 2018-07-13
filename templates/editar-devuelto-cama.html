@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+    <div class="ui middle aligned center aligned grid ">
+        <div id="edit_dev" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img style="width: 280px" class="image" src="/static/image/Editar%20devolucion.png"/>
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+                    <a style="background-color: #1AB99C" href="{% url 'cama' %}" class="ui right ribbon label"><i
+                            class="hotel icon"> {{ dev.cama.num_cama }}</i></a>
+
+                    <div class="field">
+                        <label>Producto</label>
+
+                        <div class="ui left icon input">
+                            <select id="" class="ui fluid search dropdown" name="producto">
+                                {% for producto in productos %}
+                                    <option value="{{ producto.pk }}">{{ producto }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Cantidad Devuelta</label>
+
+                        <div class="ui left icon input">
+                            {{ form.cantidad_devuelta }}
+                            {{ form.cantidad_devuelta.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Justificación</label>
+
+                        <div class="field">
+                            {{ form.justificacion }}
+                            {{ form.justificacion.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Médico</label>
+
+                        <div class="ui left icon input">
+                            {{ form.medico }}
+                            {{ form.medico.errors }}
+                        </div>
+                    </div>
+
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <a href="{% url 'devueltosCama' %}">
+                            <button class="ui button">Regresar</button>
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

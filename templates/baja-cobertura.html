@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h2 style="text-align: center; margin-bottom: 30px">PRODUCTOS EN BAJA COBERTURA</h2>
+
+    {% if detalles %}
+
+        <table class="ui celled selectable table">
+            <thead>
+
+            <tr>
+                <th class="center aligned">CÓDIGO</th>
+                <th class="center aligned">DESCRIPCIÓN</th>
+                <th class="center aligned">UM</th>
+                <th class="center aligned">CANTIDAD FALTANTE</th>
+            </tr>
+            </thead>
+            {% for d, c in detalles.items %}
+                <tbody>
+                <tr>
+                    <td>{{ d.codigo }}</td>
+                    <td>{{ d.nombre }}</td>
+                    <td>{{ d.unidad }}</td>
+                    <td>{{ c }}</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+            <tfoot class="full-width">
+            <tr>
+                <th colspan="12">
+
+                    <a id="sol_ped_farma" class="item" >
+                        <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                            <i class="send icon"></i>
+                            Solicitar
+                        </div>
+                    </a>
+
+                     <a href="{% url 'ReporteBajaCoberturaPDF' %}">
+                        <div style="background-color: #4B89DA" class="ui left floated small labeled icon button">
+                            <i class="print icon"></i>
+                            Imprimir
+                        </div>
+                    </a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+
+        <div class="ui basic modal">
+                    <div style="color: green" class="ui icon header">
+                        <i class="help circle icon"></i>
+                        Mensaje de verificación
+                    </div>
+                    <div class="content">
+                        <p style="text-align: center; color: green">¿Estás seguro que desea realizar esta acción?</p>
+                    </div>
+                    <div class="actions">
+                        <div class="ui red basic cancel inverted button">
+                            <i class="remove icon"></i>
+                            No
+                        </div>
+                        <div class="ui green ok inverted button"><a class=""
+                                                                   href="{% url 'solicitar_pedido_farmacia' %}"><i
+                                class="checkmark icon"></i>
+                            Si</a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+    {% else %}
+        <p>No hay productos en baja cobertura</p>
+    {% endif %}
+
+{% endblock %}

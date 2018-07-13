@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h2 style="text-align: center; margin-bottom: 30px">DEVOLUCIONES DE CAMA ASOCIADAS</h2>
+
+    {% if d %}
+
+        <table class="ui celled selectable table">
+            <thead>
+            <tr>
+                <th class="center aligned">CAMA No.</th>
+                <th class="center aligned">HISTORIA CLÍNICA</th>
+                <th class="center aligned">PRODUCTO</th>
+                <th class="center aligned">DOSIS</th>
+                <th class="center aligned">UNIDAD</th>
+                <th class="center aligned">CANTIDAD</th>
+                <th class="center aligned">JUSTIFICACIÓN</th>
+                <th class="center aligned">MÉDICO</th>
+            </tr>
+            </thead>
+            {% for dev  in d %}
+                <tbody>
+                <tr>
+                    <td>{{ dev.cama.num_cama }}</td>
+                    <td>{{ dev.cama.historia_clinica }}</td>
+                    <td>{{ dev.producto }}</td>
+                    <td>{{ dev.producto.dosis }} {{ dev.producto.unidad_medida }}</td>
+                    <td>{{ dev.producto.unidad }}</td>
+                    <td>{{ dev.cantidad_devuelta }}</td>
+                    <td>{{ dev.justificacion }}</td>
+                    <td>{{ dev.medico }}</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+         <tfoot class="full-width">
+                    <tr>
+                        <th colspan="12">
+                            <a href="{% url 'ReporteDevueltoCamaPDF' id_ds %}">
+                                <div style="background-color: #4B89DA" class="ui left floated small labeled icon button">
+                                    <i class="print icon"></i>
+                                    Imprimir
+                                </div>
+                            </a>
+                             <a href="{% url 'despachar_devuelto_sala' id_ds %}">
+                        <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                            <i class="undo icon"></i>
+                            Regresar
+                        </div>
+                    </a>
+                        </th>
+                    </tr>
+                    </tfoot>
+        </table>
+
+    {% else %}
+        <p>No hay devoluciones de cama relacionados</p>
+    {% endif %}
+
+{% endblock %}
+
+

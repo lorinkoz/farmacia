@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h2 style="text-align: center; margin-bottom: 30px">PEDIDOS DE CAMA ASOCIADOS</h2>
+
+    {% if pc %}
+
+        <table class="ui celled selectable table">
+            <thead>
+            <tr>
+                <th class="center aligned">CAMA No.</th>
+                <th class="center aligned">HISTORIA CLÍNICA</th>
+                <th class="center aligned">PRODUCTO</th>
+                <th class="center aligned">DOSIS</th>
+                <th class="center aligned">UNIDAD</th>
+                <th class="center aligned">CANTIDAD</th>
+                <th class="center aligned">MÉDICO</th>
+            </tr>
+            </thead>
+            {% for pdc  in pc %}
+                <tbody>
+                <tr>
+                    <td>{{ pdc.cama.num_cama }}</td>
+                    <td>{{ pdc.cama.historia_clinica }}</td>
+                    <td>{{ pdc.producto }}</td>
+                    <td>{{ pdc.producto.dosis }} {{ pdc.producto.unidad_medida }}</td>
+                    <td>{{ pdc.producto.unidad }}</td>
+                    <td>{{ pdc.cantidad_solicitada }}</td>
+                    <td>{{ pdc.medico }}</td>
+
+                </tr>
+                </tbody>
+            {% endfor %}
+            <tfoot class="full-width">
+            <tr>
+                <th colspan="12">
+                    <a href="{% url 'ReportePedidoCamaPDF' id_ps %}">
+                        <div style="background-color: #4B89DA" class="ui left floated small labeled icon button">
+                            <i class="print icon"></i>
+                            Imprimir
+                        </div>
+                    </a>
+                    <a href="{% url 'despachar_pedido_sala' id_ps %}">
+                        <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                            <i class="undo icon"></i>
+                            Regresar
+                        </div>
+                    </a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+
+    {% else %}
+        <p>No hay pedidos de cama relacionados</p>
+    {% endif %}
+
+{% endblock %}

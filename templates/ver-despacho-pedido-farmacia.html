@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+    {% if pfd %}
+        <form method="POST" action="" class="ui large form">
+            {% csrf_token %}
+
+            <table class="ui celled selectable table">
+                <thead>
+                <tr>
+                    <th colspan="2" class="left aligned">MINSAP-SC-2-06 y 9</th>
+                    <th colspan="5" class="center aligned">TRANSFERENCIA ENTRE ALMACENES</th>
+                    <th colspan="2" rowspan="2" class="left aligned">Fecha: {{ pedf.fecha_hora }}</th>
+                </tr>
+                 <tr>
+                    <th colspan="5" class="left aligned">Entidad:</th>
+                    <th colspan="2" class="left aligned">Código</th>
+                </tr>
+                <tr>
+                    <th colspan="3" class="left aligned">Almacén-Recepción:</th>
+                    <th colspan="2" class="left aligned">Código</th>
+                    <th colspan="4" class="left aligned">Dirección</th>
+                </tr>
+                <tr>
+                    <th colspan="3" class="left aligned">Almacén-Entrega:</th>
+                     <th colspan="3" class="left aligned">Dirección:</th>
+                     <th colspan="2" class="left aligned">Código:</th>
+                     <th rowspan="1" class="left aligned">Lote:</th>
+                </tr>
+                <tr>
+                    <th rowspan="2" class="center aligned">CÓDIGO</th>
+                    <th rowspan="2" class="center aligned">DESCRIPCIÓN</th>
+                    <th rowspan="2" class="center aligned">UM</th>
+                    <th colspan="2" class="center aligned">CANTIDAD</th>
+                    <th rowspan="2" class="center aligned">PRECIO</th>
+                    <th colspan="2" class="center aligned">IMPORTE</th>
+                    <th rowspan="2" class="center aligned">SALDO</th>
+                </tr>
+                <tr>
+                    <th class="center aligned">ENVIADA</th>
+                    <th class="center aligned">RECIBIDA</th>
+                    <th class="center aligned">ENVIADA</th>
+                    <th class="center aligned">RECIBIDA</th>
+                </tr>
+
+                </thead>
+                {% for pf  in pfd %}
+                    <tbody>
+
+                    <tr>
+                        <td class="left aligned">{{ pf.producto.codigo }}</td>
+                        <td class="left aligned">{{ pf.producto }}</td>
+                        <td class="left aligned">{{ pf.producto.unidad }}</td>
+                        <td class="left aligned">{{ pf.cantidad_enviada }}</td>
+                        <td class="left aligned">{{ pf.cantidad_recibida }} {{ pf.cantidad_recibida.errors }}</td>
+                        <td class="left aligned">${{ pf.producto.precio }}</td>
+                        <td class="left aligned">${{ pf.importe_enviada }}</td>
+                        <td class="left aligned">${{ pf.importe_recibida }}</td>
+                        <td class="left aligned">{{ pf.saldo}}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="6" class="center aligned">TOTAL</td>
+                    <td rowspan="1" class="left aligned">${{ pedf.importe_enviada_total }}</td>
+                    <td rowspan="1" class="left aligned">${{ pedf.importe_recibida_total }}</td>
+                 <td rowspan="1" class="left aligned"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">ENTREGADO POR: {{ pedf.entregado_por }}</td>
+                    <td colspan="3">AUTORIZADO POR: {{ pedf.autorizado_por }}</td>
+                    <td colspan="3">RECIBIDO POR: {{ pedf.recibido_por }}</td>
+                    <td>No. {{ pedf.id }}</td>
+                </tr>
+                </tbody>
+
+                <tfoot class="full-width">
+                <tr>
+                    <th colspan="12">
+
+                         <a href="{% url 'ReportePedidoAlmacenPDF' id_pf %}">
+                            <div style="background-color: #4B89DA" class="ui left floated small labeled icon button">
+                                <i class="print icon"></i>
+                                Imprimir
+                            </div>
+                        </a>
+
+                        <a href="{% url 'buscar' %}">
+                            <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                                <i class="undo icon"></i>
+                                Regresar
+                            </div>
+                        </a>
+
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </form>
+    {% else %}
+        <p>No hay solicitudes de reposición disponibles</p>
+    {% endif %}
+
+{% endblock %}

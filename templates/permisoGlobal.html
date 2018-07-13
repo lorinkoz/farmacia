@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+     <h2 style="text-align: center; margin-bottom: 30px">PERMISOS</h2>
+
+    <div style="text-align: center;" class="ui middle aligned center aligned grid " xmlns="http://www.w3.org/1999/html">
+        <div style="max-width: 355px" class="column">
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <label>Jefe Dpto. de Farmacia</label>
+
+                        <div class="ui left icon input">
+                            {{ form.jefe_farmacia }}
+                            {{ form.jefe_farmacia.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Dpto. de Farmacia</label>
+
+                        <div class="ui left icon input">
+                            {{ form.farmacia }}
+                            {{ form.farmacia.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Jefe Dpto. de Contabilidad</label>
+
+                        <div class="ui left icon input">
+                            {{ form.jefe_contabilidad }}
+                            {{ form.jefe_contabilidad.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Dpto. de Contabilidad</label>
+
+                        <div class="ui left icon input">
+                            {{ form.contabilidad }}
+                            {{ form.contabilidad.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Almacén de Medicamentos</label>
+
+                        <div class="ui left icon input">
+                            {{ form.almacen }}
+                            {{ form.almacen.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Secretaria de sala</label>
+
+                        <div class="ui left icon input">
+                            {{ form.secretaria_sala }}
+                            {{ form.secretaria_sala.errors }}
+                        </div>
+                    </div>
+                    <div class="ui large">
+                        <button class="ui fluid large button" style="background-color: #35BB9B" type="submit">Guardar</button>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+    <div class="ui middle aligned center aligned grid ">
+        <div id="add_dev" class="column">
+            <div style="text-align: left" class="column">
+                <h2 style="color: #35BB9B" class="ui image header">
+                    <img style="width: 280px" class="image" src="/static/image/Agregar%20devolución.png"/>
+                </h2>
+            </div>
+            <form method="POST" action="" class="ui large form">
+                {% csrf_token %}
+
+                <div class="ui stacked segment">
+                    <a style="background-color: #1AB99C" href="{% url 'cama' %}" class="ui right ribbon label"><i
+                            class="hotel icon"> {{ cama.num_cama }}</i></a>
+
+                    <div class="field">
+                        <label>Producto</label>
+
+                        <div class="ui left icon input">
+                            <select id="" class="ui fluid search dropdown" name="producto">
+                                {% for producto in productos %}
+                                    <option value="{{ producto.pk }}">{{ producto }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Cantidad Devuelta</label>
+
+                        <div class="ui left icon input">
+                            {{ form.cantidad_devuelta }}
+                            {{ form.cantidad_devuelta.errors }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Justificación</label>
+
+                        <div class="two fields">
+                            <div style="width: 900px" class="field">
+                                <select id="ju" class="ui fluid search dropdown" name="justificacion">
+                                    {% for ju in just %}
+                                        <option value="{{ ju.pk }}">{{ ju }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <a onclick="obtener_ju({{ id_c }})" class="" href="javascript:void()"><i
+                                    style="color: #4B89DA"
+                                    class="write icon"> </i>
+                            </a>
+                            <a class="" href="{% url 'agregar_justificacion' id_c %}"><i style="color: #35BB9B"
+                                                                                         class="plus icon"> </i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Médico</label>
+
+                        <div class="ui left icon input">
+                            {{ form.medico }}
+                            {{ form.medico.errors }}
+                        </div>
+                    </div>
+
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <button type="reset" class="ui button">Cancelar</button>
+                    </div>
+                </div>
+                <div class="ui large">
+                    <a class="ui fluid large button" href="{% url 'cama' %}">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,391 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="{% static "css/semantic.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/select2.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/jquery.datetimepicker.css" %}" rel="stylesheet">
+
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <title></title>
+
+    <style>
+
+        #add_cama, #edit_cama, #edit_ped, #add_ped, #add_dev, #add_pre, #edit_dev, #add_cant_pro, #add_pro, #edit_pro, #add_sala,
+        #edit_sala, #add_pre, #add_jus, #edit_pre, #edit_jus, #add_dal, #edit_dal, #add_usu, #edit_usu, #buscar {
+            max-width: 450px;
+        }
+
+        .column {
+            max-width: 750px;
+        }
+
+        .ui.pusher.button {
+            margin-left: 187px;
+        }
+
+        .botones, .btn {
+            margin-top: 27px;
+        }
+
+        #b, #c, #d, #e, #f {
+            margin-right: 188px;
+        }
+
+        a {
+            color: rgba(0, 0, 0, 1);
+        }
+
+        td {
+            width: 390px;
+            text-align: left;
+        }
+
+        a:hover {
+            color: rgba(56, 56, 56, 1);
+        }
+
+        h5, h2, p {
+            color: #35BB9B;
+        }
+
+        h1 {
+            text-align: left;
+            width: 100%;
+        }
+
+        .ui.indicating.progress[data-percent^="100"] .label, .ui.indicating.progress[data-percent^="9"] .label {
+            color: #000000;
+        }
+
+        .ui.menu {
+            border-radius: 0px;
+        }
+
+        .ui.raised.segment {
+            width: 750px;
+        }
+
+        .ui.stacked.segment {
+            background: #f3f4f5;
+        }
+
+        .ui.menu .ui.dropdown .menu > .item {
+            color: rgba(0, 0, 0, .87) !important;
+            background-color: rgba(255, 255, 255, .5) !important;
+        }
+
+        .ui.progress .bar > .progress {
+            color: #000000;
+        }
+
+        .ui.structured.table {
+            border-collapse: collapse;
+        }
+
+        .ui.attached:not(.message) + .ui.attached.segment:not(.top) {
+            background: #ffffff;
+        }
+
+        body {
+            background: #ffffff;
+        }
+
+        .ui.button {
+            background: #ffffff;
+        }
+
+        .ui.button:hover {
+            background-color: #1AB99C;
+        }
+
+        .ui.header > .image:not(.icon), .ui.header > img {
+            width: 200px;
+            height: 60px;
+        }
+
+        .pushable > .pusher {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .pushable > .pusher img {
+            width: 50%;
+            height: auto;
+        }
+
+        .ui.container {
+            max-width: 1127px;
+            min-width: 723px;
+        }
+
+        .ui[class*="right ribbon"].label {
+            left: calc(58% + 1rem + 1.2em);
+        }
+
+        @font-face {
+            font-family: "Gotham";
+            src: url({% static "fonts/Gotham-Font/GothamBook.ttf" %}) format("truetype");
+        }
+
+        html, h1, h2, p, th, td, h5, h4, h3, label, span, li {
+            font-family: "Gotham", sans-serif;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="ui top attached demo menu">
+    <a class="item">
+        <i class="sidebar icon"></i>
+        Menu
+    </a>
+    {% comment %}
+    <div id="carusel" class="ui text shape">
+        <div class="sides">
+            <div class="ui header side">Did you know? This side starts visible</div>
+            <div class="ui header side">Help, its another side</div>
+            <div class="ui header side">This is the last side</div>
+        </div>
+    </div>
+    {% endcomment %}
+
+</div>
+
+<div class="ui bottom attached segment pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+        <a class="item" href="{% url 'inicio' %}">
+            <i class="home icon"></i>Inicio
+        </a>
+        {% if request.user in pglobal.secretaria_sala.all %}
+            <a class="item" href="{% url 'cama' %}">
+                <i class="hotel icon"></i>Camas
+            </a>
+            <a class="item" href="{% url 'pedidosCama' %}">
+                <i class="write icon"></i>Pedidos de Cama
+            </a>
+            <a class="item" href="{% url 'devueltosCama' %}">
+                <i class="write icon"></i>Devoluciones de Cama
+            </a>
+        {% endif %}
+        <a class="item" href="{% url 'existencia' %}">
+            <i class="tasks icon"></i>Existencia
+        </a>
+        <a class="item" href="{% url 'buscar' %}">
+            <i class="search icon"></i> Buscar
+        </a>
+        <a class="item" href="{% url 'ayuda' %}">
+            <i class="help circle icon"></i> Ayuda
+        </a>
+        {% if request.user == pglobal.jefe_farmacia %}
+            <a class="item" href="{% url 'agregar_cantidad_medicamentos' %}">
+                <i class="in cart icon"></i> Abastecer
+            </a>
+            <a class="item" href="{% url 'baja_cobertura' %}">
+                <i class="add to cart icon"></i> Baja Cobertura
+            </a>
+        {% endif %}
+        {% if request.user in pglobal.contabilidad.all %}
+            <a class="item" href="{% url 'filtro_importe' %}">
+                <i class="filter icon"></i> Salida al Centro de Costo
+            </a>
+        {% endif %}
+        {% if user.is_superuser %}
+            <a class="item" href="{% url 'sala' %}">
+                <i class="list layout icon"></i>Servicios
+            </a>
+        {% endif %}
+        {% if request.user == pglobal.jefe_farmacia or request.user == pglobal.jefe_contabilidad %}
+            <a class="item" href="{% url 'producto' %}">
+                <i class="lab icon"></i>Productos
+            </a>
+        {% endif %}
+        {% if request.user in pglobal.farmacia.all %}
+            <a class="item" href="{% url 'pedidosSala' %}">
+                <i class="write icon"></i>Pedidos de Sala
+            </a>
+            <a class="item" href="{% url 'devolucionesSala' %}">
+                <i class="write icon"></i>Devoluciones de Sala
+            </a>
+        {% endif %}
+
+        {% if request.user == pglobal.jefe_farmacia %}
+            <a class="item" href="{% url 'devolucionesFarmacia' %}">
+                <i class="reply icon"></i>Devoluciones
+            </a>
+        {% endif %}
+        {% if request.user == pglobal.almacen %}
+            <a class="item" href="{% url 'pedidosAlmacen' %}">
+                <i class="share icon"></i>Solicitudes de Reposición
+            </a>
+            <a class="item" href="{% url 'devolucionesAlmacen' %}">
+                <i class="reply icon"></i>Solicitudes de Devolución
+            </a>
+        {% endif %}
+        {% if user.is_superuser %}
+            <a class="item" href="{% url 'permisoGlobal' %}">
+                <i class="privacy icon"></i>Permisos
+            </a>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <a class="item" href="{% url 'deslogear' %}">
+                <i class="sign out icon"></i> Cerrar sesión
+            </a>
+        {% else %}
+            <a class="item" href="{% url 'logear' %}">
+                <i class="sign in icon"></i> AUTENTÍQUESE
+            </a>
+        {% endif %}
+    </div>
+    <div class="pusher">
+        <div class="ui basic segment">
+            <div class="ui container">
+                <div class="ui image label">
+                    <img src="/static/image/login.png">
+                    <label>{{ user.username }}</label>
+                    <a href="{% url 'deslogear' %}"><i style="text-align: right" class="delete icon"></i> </a>
+                </div>
+
+                {% block contenido %}
+
+                {% endblock %}
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% block footer %}
+
+{% endblock %}
+
+</body>
+
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/semantic.min.js" %}"></script>
+<script src="{% static "js/modal.js" %}"></script>
+<script src="{% static "js/progress.js" %}"></script>
+<script src="{% static "js/validate-form.js" %}"></script>
+<script src="{% static "js/form.js" %}"></script>
+<script src="{% static "js/select2.min.js" %}"></script>
+<script src="{% static "js/jquery.datetimepicker.full.min.js" %}"></script>
+<script>
+
+    $('.ui.sidebar')
+            .sidebar({
+                context: $('.bottom.segment')
+            })
+            .sidebar('attach events', '.menu .item')
+    ;
+    $('.ui.shape')
+            .shape('flip up')
+    ;
+    $('select')
+            .select2()
+    ;
+    $('.ui.accordion')
+            .accordion()
+    ;
+    $('.ui.basic.modal')
+            .modal('attach events', '#clean_cama.item', 'show')
+    ;
+    $('.ui.basic.modal')
+            .modal('attach events', '#sol_dev_sala.item', 'show')
+    ;
+    $('.ui.basic.modal')
+            .modal('attach events', '#sol_dev_farma.item', 'show')
+    ;
+    $('.ui.basic.modal')
+            .modal('attach events', '#sol_ped_sala.item', 'show')
+    ;
+    $('.ui.basic.modal')
+            .modal('attach events', '#sol_ped_farma.item', 'show')
+    ;
+
+
+    $('.ui.basic.modal')
+            .modal('attach events', '#clean_dev_alm.button', 'show')
+    ;
+
+
+    $('.ui.basic.modal')
+            .modal('attach events', '#clean_sala.button', 'show')
+    ;
+    $('.ui.basic.modal')
+            .modal('attach events', '#clean_producto.button', 'show')
+    ;
+    $('.ui.basic.modal').on('click', function () {
+        var dato = $("#clean_pedido_sala").attr("data-id");
+    })
+            .modal('attach events', '#clean_pedido_sala.button', 'show')
+    ;
+    $('.ui.basic.modal')
+            .modal('attach events', '#clean_dev_sala.button', 'show')
+    ;
+
+
+    jQuery('#ex').datetimepicker({
+        format: 'd/m/Y H:i',
+        lang: 'es'
+    });
+    jQuery('#ex1').datetimepicker({
+        format: 'd/m/Y H:i',
+        lang: 'es'
+    });
+    jQuery('#ex2').datetimepicker({
+        format: 'd/m/Y H:i',
+        lang: 'es'
+    });
+    jQuery('#ex3').datetimepicker({
+        format: 'd/m/Y H:i',
+        lang: 'es'
+    });
+
+    function obtener_um() {
+        var d = document.getElementById("um");
+        var h = d.options[d.selectedIndex].value;
+        location.href = "/editar-unidad-medida/" + h;
+    }
+    ;
+
+    function obtener_pre() {
+        var d = document.getElementById("pr");
+        var h = d.options[d.selectedIndex].value;
+        location.href = "/editar-presentacion/" + h;
+    }
+    ;
+
+    function obtener_ju(cama) {
+        var d = document.getElementById("ju");
+        var k = d.options[d.selectedIndex].value;
+        location.href = "/editar-justificacion/" + k + "/" + cama;
+    }
+    ;
+    function obtener_pro(cama) {
+        var d = document.getElementById("ju");
+        var k = d.options[d.selectedIndex].value;
+        location.href = "/editar-justificacion/" + k + "/" + cama;
+    }
+    ;
+
+    $('.ui.form')
+            .form({
+                fields: validationRules,
+                inline: true,
+                on: 'blur'
+            })
+    ;
+
+</script>
+{% block script %}
+
+{% endblock %}
+
+</html>

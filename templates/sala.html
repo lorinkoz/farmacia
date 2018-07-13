@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<h2 style="text-align: center; margin-bottom: 30px">SERVICIOS</h2>
+
+    {% if s %}
+
+        <table class="ui celled selectable table">
+            <thead>
+
+            <tr>
+                <th class="center aligned">SERVICIO</th>
+                <th class="center aligned">SALA</th>
+                <th class="center aligned">CENTRO DE COSTO</th>
+                <th class="center aligned">SECRETARIA</th>
+                <th class="center aligned"><i class="database icon"></i></th>
+            </tr>
+            </thead>
+            {% for ss  in s %}
+                <tbody>
+                <tr>
+                    <td>{{ ss.servicio }}</td>
+                    <td>{{ ss.apodo }}</td>
+                    <td>{{ ss.centro_costo }}</td>
+                    <td>{{ ss.secretaria.first_name }} {{ss.secretaria.last_name }}</td>
+
+                    <td class="collapsing">
+                        {% if user.is_authenticated %}
+
+                            <a style="background-color: #4B89DA" class="ui compact button" data-inverted="" data-tooltip="Editar servicio"
+                               data-position="top center" href="{% url 'editar_sala' ss.id%}"><i
+                                    class="edit icon"> </i></a>
+                            <a style="background-color: #D94452" class="ui compact button" data-inverted="" data-tooltip="Eliminar servicio"
+                               data-position="bottom center" id="clean_sala" href="{% url 'eliminar_sala' ss.id%}"><i
+                                    class="remove icon"> </i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            {% endfor %}
+            <tfoot class="full-width">
+            <tr>
+                <th colspan="12">
+                    <a href="{% url 'agregar_sala' %}">
+                        <div style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                            <i class="plus icon"></i>
+                            Agregar
+                        </div>
+                    </a>
+                    <a href="{% url 'ReporteSalaPDF' %}">
+                        <div style="background-color: #4B89DA" class="ui left floated small labeled icon button">
+                            <i class="print icon"></i>
+                            Imprimir
+                        </div>
+                    </a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+
+    {% else %}
+        <p>No hay servicios disponibles</p>
+
+         <a href="{% url 'agregar_sala' %}">
+            <div id="d" style="background-color: #35BB9B" class="ui right floated small labeled icon button">
+                <i class="plus icon"></i>
+                Agregar
+            </div>
+        </a>
+
+    {% endif %}
+
+
+{% endblock %}
