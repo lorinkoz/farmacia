@@ -138,8 +138,8 @@ class Producto(models.Model):
     dosis = models.FloatField()
     unidad_medida = models.ForeignKey('UnidadMedida')
     unidad = models.ForeignKey('Presentacion')
-    codigo = models.CharField(max_length=8, validators=[validar], unique=True)
-    precio = models.DecimalField(max_digits=7, decimal_places=2)
+    codigo = models.CharField(max_length=20, validators=[validar], unique=True)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return '%s' % self.nombre
