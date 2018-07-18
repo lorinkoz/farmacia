@@ -3,6 +3,8 @@
 .idea/
 .venv/
 .vscode/
+*_deploy/
 *.env
 *.pyc
 *.sqlite3
+*_deploy.py
