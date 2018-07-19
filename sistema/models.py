@@ -2,7 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 
-def validar(valor):
+def validar_cc(valor):
     if len(valor) != 3:
         raise ValidationError(' el Centro de Costo debe tener 3 caracteres')
     if not valor.isnumeric():
@@ -12,7 +12,7 @@ def validar(valor):
 class Sala(models.Model):
     servicio = models.CharField(max_length=40)
     apodo = models.CharField(max_length=20)
-    centro_costo = models.CharField(validators=[validar], max_length=3, unique=True)
+    centro_costo = models.CharField(validators=[validar_cc], max_length=3, unique=True)
     secretaria = models.ForeignKey('auth.User', related_name='sala')
 
     def __str__(self):
@@ -22,7 +22,7 @@ class Sala(models.Model):
         ordering = ['centro_costo']
 
 
-def validar(valor):
+def validar_hc(valor):
     if len(valor) != 11:
         raise ValidationError(' la H.C debe tener 11 caracteres')
     if not valor.isnumeric():
@@ -32,7 +32,7 @@ def validar(valor):
 class Cama(models.Model):
     sala = models.ForeignKey(Sala, on_delete=models.CASCADE)
     num_cama = models.IntegerField()
-    historia_clinica = models.CharField(validators=[validar], max_length=11, unique=True)
+    historia_clinica = models.CharField(validators=[validar_hc], max_length=11, unique=True)
     nombre = models.CharField(max_length=30)
     apellido1 = models.CharField(max_length=30)
     apellido2 = models.CharField(max_length=30)
